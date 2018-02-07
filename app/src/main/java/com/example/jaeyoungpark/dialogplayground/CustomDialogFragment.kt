@@ -1,9 +1,12 @@
 package com.example.jaeyoungpark.dialogplayground
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v4.app.DialogFragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -41,6 +44,8 @@ class CustomDialogFragment : DialogFragment() {
                     "it.top=${it.top}, it.bottom=${it.bottom}, \n" +
                     "it.width=${it.width}, it.height=${it.height}")
         }
+
+        view?.setOnClickListener { mListener?.onItemClicked() }
     }
 
     override fun onStart() {
@@ -48,6 +53,10 @@ class CustomDialogFragment : DialogFragment() {
         val attributes = dialog.window.attributes
         attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
         attributes.y = 300
+
+        val drawable = ContextCompat.getDrawable(context, R.drawable.corner)
+//        val drawable = ColorDrawable(Color.TRANSPARENT)
+        dialog.window.setBackgroundDrawable(drawable)
         dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.window.attributes = attributes
     }
@@ -68,7 +77,7 @@ class CustomDialogFragment : DialogFragment() {
     }
 
     interface Listener {
-        fun onItemClicked(position: Int)
+        fun onItemClicked()
     }
 
     companion object {
