@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
         fragment = CustomDialogFragment.newInstance(30)
                 .apply { show(supportFragmentManager, "dialog") }
-//
+
 //        ItemListDialogFragment.newInstance(30)
 //                .apply { show(supportFragmentManager, "dialog") }
 

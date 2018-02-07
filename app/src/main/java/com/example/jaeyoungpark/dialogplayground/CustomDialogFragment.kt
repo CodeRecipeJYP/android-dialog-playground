@@ -54,8 +54,8 @@ class CustomDialogFragment : DialogFragment() {
 //        attributes.y = 300
 
 //        val drawable = ContextCompat.getDrawable(context, R.drawable.corner)
-//        val drawable = ColorDrawable(Color.TRANSPARENT)
-//        dialog.window.setBackgroundDrawable(drawable)
+        val drawable = ColorDrawable(Color.TRANSPARENT)
+        dialog.window.setBackgroundDrawable(drawable)
 
         dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.window.attributes = attributes
