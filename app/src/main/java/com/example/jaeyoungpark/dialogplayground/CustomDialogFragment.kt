@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 
 
@@ -47,6 +48,7 @@ class CustomDialogFragment : DialogFragment() {
         val attributes = dialog.window.attributes
         attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
         attributes.y = 300
+        dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.window.attributes = attributes
     }
 
