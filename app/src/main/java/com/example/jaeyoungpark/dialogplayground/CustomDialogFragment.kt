@@ -30,7 +30,8 @@ class CustomDialogFragment : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_custom, container, false)
+        val view = inflater.inflate(R.layout.fragment_custom, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -39,6 +40,14 @@ class CustomDialogFragment : DialogFragment() {
                     "it.top=${it.top}, it.bottom=${it.bottom}, \n" +
                     "it.width=${it.width}, it.height=${it.height}")
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val attributes = dialog.window.attributes
+        attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+        attributes.y = 300
+        dialog.window.attributes = attributes
     }
 
     override fun onAttach(context: Context) {
