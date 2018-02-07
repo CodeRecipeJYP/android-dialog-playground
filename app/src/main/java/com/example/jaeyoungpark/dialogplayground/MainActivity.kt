@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), ItemListDialogFragment.Listener {
+class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), ItemListDialogFragment.Listener {
                     .setAction("Action", null).show()
         }
 
-        ItemListDialogFragment.newInstance(30).show(supportFragmentManager, "dialog")
+        CustomDialogFragment.newInstance(30).show(supportFragmentManager, "dialog")
     }
 
     override fun onItemClicked(position: Int) {
