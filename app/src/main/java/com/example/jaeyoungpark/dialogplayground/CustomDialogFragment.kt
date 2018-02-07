@@ -54,9 +54,12 @@ class CustomDialogFragment : DialogFragment() {
 //        attributes.y = 300
 
 //        val drawable = ContextCompat.getDrawable(context, R.drawable.corner)
+
+        // Remove backward uncompatible shadow
         val drawable = ColorDrawable(Color.TRANSPARENT)
         dialog.window.setBackgroundDrawable(drawable)
 
+        // Remove Feature "everything behind this window will be dimmed."
         dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         dialog.window.attributes = attributes
     }
