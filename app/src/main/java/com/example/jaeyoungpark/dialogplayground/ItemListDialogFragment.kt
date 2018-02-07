@@ -27,7 +27,7 @@ const val ARG_ITEM_COUNT = "item_count"
  * You activity (or fragment) needs to implement [ItemListDialogFragment.Listener].
  */
 class ItemListDialogFragment : BottomSheetDialogFragment() {
-    private var mListener: Listener? = null
+    private var mListener: CustomDialogFragment.Listener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -43,19 +43,15 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         super.onAttach(context)
         val parent = parentFragment
         if (parent != null) {
-            mListener = parent as Listener
+            mListener = parent as CustomDialogFragment.Listener
         } else {
-            mListener = context as Listener
+            mListener = context as CustomDialogFragment.Listener
         }
     }
 
     override fun onDetach() {
         mListener = null
         super.onDetach()
-    }
-
-    interface Listener {
-        fun onItemClicked(position: Int)
     }
 
     private inner class ViewHolder internal constructor(inflater: LayoutInflater, parent: ViewGroup)
@@ -66,7 +62,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         init {
             text.setOnClickListener {
                 mListener?.let {
-                    it.onItemClicked(adapterPosition)
+                    it.onItemClicked()
                     dismiss()
                 }
             }

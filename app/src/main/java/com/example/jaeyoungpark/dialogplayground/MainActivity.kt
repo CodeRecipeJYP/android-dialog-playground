@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
     private val TAG = MainActivity::class.java.simpleName
     var fragment: CustomDialogFragment? = null
-    var elev = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +31,9 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
         fragment = CustomDialogFragment.newInstance(30)
                 .apply { show(supportFragmentManager, "dialog") }
+//
+//        ItemListDialogFragment.newInstance(30)
+//                .apply { show(supportFragmentManager, "dialog") }
 
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
     }
@@ -39,32 +41,14 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
     private var dialog: Dialog? = null
 
     override fun onItemClicked() {
-        Log.d(TAG, "onItemClicked() called  with: fragment = [${fragment}]")
-        Log.d(TAG, "onItemClicked() called  with: fragment = [${fragment?.dialog}]")
-        dialog = fragment?.dialog
-        Log.d(TAG, "onItemClicked() called  with: dialog.window = [${dialog?.window}]")
-
-        dialog?.window?.setElevation(elev)
-
-        elev += 10f
-        Log.d(TAG, "onItemClicked() called  with: dialog.window.decorView = [${dialog?.window?.decorView}]")
-        var view: View? = dialog?.window?.decorView
-        var outlineProvider: ViewOutlineProvider? = dialog?.window?.decorView?.outlineProvider
-
-        val outlineRect = outlineProvider?.let {
-            view?.let {
-                val outline = Outline()
-                outline.setEmpty()
-                outline.setAlpha(1.0f)
-                outlineProvider.getOutline(view, outline)
-
-                val rect = Rect()
-                outline.getRect(rect)
-                Pair(rect, outline.radius)
-            }
-        }
-        Log.d(TAG, "onItemClicked() called  with: rect = [${outlineRect?.first}], radius = [${outlineRect}]")
-
+//        Log.d(TAG, "onItemClicked() called  with: fragment = [${fragment}]")
+//        Log.d(TAG, "onItemClicked() called  with: fragment = [${fragment?.dialog}]")
+//        dialog = fragment?.dialog
+//        Log.d(TAG, "onItemClicked() called  with: dialog.window = [${dialog?.window}]")
+//
+//        Log.d(TAG, "onItemClicked() called  with: dialog.window.decorView = [${dialog?.window?.decorView}]")
+//        var view: View? = dialog?.window?.decorView
+//        var outlineProvider: ViewOutlineProvider? = dialog?.window?.decorView?.outlineProvider
 
 //
 //        val outlineProvider: ViewOutlineProvider? = dialog?.window?.decorView?.outlineProvider ?: null
