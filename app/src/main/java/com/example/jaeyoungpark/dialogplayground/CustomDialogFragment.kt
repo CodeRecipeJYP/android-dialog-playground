@@ -47,7 +47,8 @@ class CustomDialogFragment : DialogFragment() {
         attributes.y = arguments.getInt(ARG_POSTIION)
 
         // Remove backward uncompatible shadow
-        val drawable = ColorDrawable(Color.RED)
+//        val drawable = ColorDrawable(Color.RED)
+        val drawable = ColorDrawable(Color.TRANSPARENT)
         dialog.window.setBackgroundDrawable(drawable)
 
         // Remove Feature "everything behind this window will be dimmed."
