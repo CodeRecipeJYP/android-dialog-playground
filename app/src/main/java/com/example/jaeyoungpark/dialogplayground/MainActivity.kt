@@ -33,9 +33,6 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
 
         fragment = CustomDialogFragment.newInstance(30)
                 .apply {
-                    this.
-                }
-                .apply {
                     supportFragmentManager.beginTransaction()
                             .let { transaction ->
                                 transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
