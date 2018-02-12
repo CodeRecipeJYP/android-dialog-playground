@@ -38,11 +38,18 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
 //                    .setAction("Action", null).show()
 
             initPosition()
-            showDialogWithPosition(y, if (ylist.isEmpty()) 0 else ylist.pop())
+            if (y == 0) y = getStatusbarHeight()
+
         }
 
-        frame.setOnClickListener { showDialogWithPosition(y, 1) }
-        tv2.setOnClickListener { showDialogWithPosition(y, -1) }
+        tv1.setOnClickListener { v -> showDialogWithView(v!!) }
+        tv2.setOnClickListener { v -> showDialogWithView(v!!) }
+        tv3.setOnClickListener { v -> showDialogWithView(v!!) }
+        tv4.setOnClickListener { v -> showDialogWithView(v!!) }
+        tv5.setOnClickListener { v -> showDialogWithView(v!!) }
+        frame.setOnClickListener { v -> showDialogWithView(v!!) }
+//        frame.setOnClickListener { showDialogWithPosition(y, 1) }
+//        tv2.setOnClickListener { showDialogWithPosition(y, -1) }
 
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
 
@@ -55,6 +62,10 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
     }
 
+    private fun showDialogWithView(v: View) {
+        showDialogWithPosition(getScreenPosition(v) - getStatusbarHeight())
+    }
+
     private fun initPosition() {
         listOf(
                 tv1, tv2, tv3, tv4,
@@ -62,6 +73,13 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         ).forEach { printPosition(it!!) }
 
         printStatusBar()
+    }
+
+    private fun getStatusbarHeight(): Int {
+        val rectangle = Rect()
+        val window = window
+        window.decorView.getWindowVisibleDisplayFrame(rectangle)
+        return rectangle.top
     }
 
     private fun printStatusBar() {
@@ -80,14 +98,18 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
             tv.getLocationInWindow(this)
         }
 
+        tv.text = "w= ${windowPosition[1]}, p= ${getScreenPosition(tv)}"
+    }
+
+    private fun getScreenPosition(tv: View): Int {
         val screenPosition = IntArray(2).apply {
             tv.getLocationOnScreen(this)
         }
 
-        tv.text = "w= ${windowPosition[1]}, p= ${screenPosition[1]}"
+        return screenPosition[1]
     }
 
-    private fun showDialogWithPosition(position: Int, grad: Int) {
+    private fun showDialogWithPosition(position: Int, grad: Int = 0) {
         fragment = CustomDialogFragment.newInstance(position)
                 .apply { show(supportFragmentManager, "dialog") }
         y += grad
