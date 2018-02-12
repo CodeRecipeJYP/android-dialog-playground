@@ -33,7 +33,7 @@ class CustomDialogFragment : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_custom, container, false)
-//        dialog.window.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window.requestFeature(Window.FEATURE_NO_TITLE)
         return view
     }
 
@@ -50,19 +50,17 @@ class CustomDialogFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
 //        setStyle(, 0)
-//        val attributes = dialog.window.attributes
-//        attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
-//        attributes.y = 300
-
-//        val drawable = ContextCompat.getDrawable(context, R.drawable.corner)
+        val attributes = dialog.window.attributes
+        attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
+        attributes.y = 300
 
         // Remove backward uncompatible shadow
-//        val drawable = ColorDrawable(Color.TRANSPARENT)
-//        dialog.window.setBackgroundDrawable(drawable)
+        val drawable = ColorDrawable(Color.RED)
+        dialog.window.setBackgroundDrawable(drawable)
 
         // Remove Feature "everything behind this window will be dimmed."
-//        dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-//        dialog.window.attributes = attributes
+        dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog.window.attributes = attributes
     }
 
     override fun onAttach(context: Context) {
