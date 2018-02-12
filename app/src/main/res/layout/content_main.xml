@@ -49,7 +49,7 @@
         android:layout_weight="1"
         />
 
-    <FrameLayout
+    <TextView
         android:id="@+id/frame"
         android:name="com.example.jaeyoungpark.dialogplayground.MainActivityFragment"
         android:layout_width="match_parent"

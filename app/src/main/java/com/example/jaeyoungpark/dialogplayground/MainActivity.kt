@@ -12,11 +12,15 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.ViewOutlineProvider
+import android.view.Window
 import android.widget.TextView
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
+import android.view.Window.ID_ANDROID_CONTENT
+
+
 
 class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
     private val TAG = MainActivity::class.java.simpleName
@@ -34,12 +38,15 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
 //                    .setAction("Action", null).show()
 
             initPosition()
-            showDialogWithPosition(y)
+            showDialogWithPosition(y, if (ylist.isEmpty()) 0 else ylist.pop())
         }
+
+        frame.setOnClickListener { showDialogWithPosition(y, 1) }
+        tv2.setOnClickListener { showDialogWithPosition(y, -1) }
 
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
 
-        showDialogWithPosition(y)
+        showDialogWithPosition(y, 0)
 
 
 //        ItemListDialogFragment.newInstance(30)
@@ -53,6 +60,19 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
                 tv1, tv2, tv3, tv4,
                 tv5
         ).forEach { printPosition(it!!) }
+
+        printStatusBar()
+    }
+
+    private fun printStatusBar() {
+        val rectangle = Rect()
+        val window = window
+        window.decorView.getWindowVisibleDisplayFrame(rectangle)
+        val statusBarHeight = rectangle.top
+        val contentViewTop = window.findViewById<View>(Window.ID_ANDROID_CONTENT).top
+        val titleBarHeight = contentViewTop - statusBarHeight
+
+        frame.text = "statusBarHeight=${statusBarHeight}, contentViewTop=${contentViewTop}, titleBarHeight=${titleBarHeight}"
     }
 
     private fun printPosition(tv: TextView) {
@@ -67,10 +87,10 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         tv.text = "w= ${windowPosition[1]}, p= ${screenPosition[1]}"
     }
 
-    private fun showDialogWithPosition(position: Int) {
+    private fun showDialogWithPosition(position: Int, grad: Int) {
         fragment = CustomDialogFragment.newInstance(position)
                 .apply { show(supportFragmentManager, "dialog") }
-        y += if (ylist.isEmpty()) 0 else ylist.pop()
+        y += grad
     }
 
     private var dialog: Dialog? = null
