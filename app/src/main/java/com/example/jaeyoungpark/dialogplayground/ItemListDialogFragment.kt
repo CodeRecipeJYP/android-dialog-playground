@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_item_list_dialog.*
 import kotlinx.android.synthetic.main.fragment_item_list_dialog_item.view.*
 
 // TODO: Customize parameter argument names
-const val ARG_ITEM_COUNT = "item_count"
+const val ARG_POSTIION = "position"
 
 /**
  *
@@ -36,7 +36,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         list.layoutManager = LinearLayoutManager(context)
-        list.adapter = ItemAdapter(arguments.getInt(ARG_ITEM_COUNT))
+        list.adapter = ItemAdapter(arguments.getInt(ARG_POSTIION))
     }
 
     override fun onAttach(context: Context) {
@@ -90,7 +90,7 @@ class ItemListDialogFragment : BottomSheetDialogFragment() {
         fun newInstance(itemCount: Int): ItemListDialogFragment =
                 ItemListDialogFragment().apply {
                     arguments = Bundle().apply {
-                        putInt(ARG_ITEM_COUNT, itemCount)
+                        putInt(ARG_POSTIION, itemCount)
                     }
                 }
 

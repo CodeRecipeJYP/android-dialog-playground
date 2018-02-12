@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
     private val TAG = MainActivity::class.java.simpleName
     var fragment: CustomDialogFragment? = null
+    var y: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,19 +26,27 @@ class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+
+            showDialogWithPosition(y)
         }
 
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
 
-        fragment = CustomDialogFragment.newInstance(30)
-                .apply { show(supportFragmentManager, "dialog") }
+        showDialogWithPosition(y)
+
 
 //        ItemListDialogFragment.newInstance(30)
 //                .apply { show(supportFragmentManager, "dialog") }
 
         Log.d(TAG, "onCreate() called  with: fragment = [${fragment}]")
+    }
+
+    private fun showDialogWithPosition(position: Int) {
+        fragment = CustomDialogFragment.newInstance(position)
+                .apply { show(supportFragmentManager, "dialog") }
+        y += 10
     }
 
     private var dialog: Dialog? = null

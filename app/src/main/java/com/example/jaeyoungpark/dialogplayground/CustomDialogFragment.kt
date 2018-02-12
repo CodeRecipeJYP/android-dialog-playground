@@ -13,19 +13,9 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.TextView
+import kotlinx.android.synthetic.main.fragment_custom.view.*
 
 
-/**
- *
- * A fragment that shows a list of items as a modal bottom sheet.
- *
- * You can show this modal bottom sheet from your activity like this:
- * <pre>
- *    ItemListDialogFragment.newInstance(30).show(supportFragmentManager, "dialog")
- * </pre>
- *
- * You activity (or fragment) needs to implement [ItemListDialogFragment.Listener].
- */
 class CustomDialogFragment : DialogFragment() {
     private val TAG = CustomDialogFragment::class.java.simpleName
     private var mListener: Listener? = null
@@ -34,6 +24,7 @@ class CustomDialogFragment : DialogFragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_custom, container, false)
         dialog.window.requestFeature(Window.FEATURE_NO_TITLE)
+        view.tv_value.text = "${arguments.getInt(ARG_POSTIION)}"
         return view
     }
 
@@ -52,7 +43,8 @@ class CustomDialogFragment : DialogFragment() {
 //        setStyle(, 0)
         val attributes = dialog.window.attributes
         attributes.width = ViewGroup.LayoutParams.MATCH_PARENT
-        attributes.y = 300
+        attributes.gravity = Gravity.TOP
+        attributes.y = arguments.getInt(ARG_POSTIION)
 
         // Remove backward uncompatible shadow
         val drawable = ColorDrawable(Color.RED)
@@ -83,10 +75,10 @@ class CustomDialogFragment : DialogFragment() {
     }
 
     companion object {
-        fun newInstance(itemCount: Int): CustomDialogFragment =
+        fun newInstance(position: Int): CustomDialogFragment =
                 CustomDialogFragment().apply {
                     arguments = Bundle().apply {
-                        putInt(ARG_ITEM_COUNT, itemCount)
+                        putInt(ARG_POSTIION, position)
                     }
                 }
 
