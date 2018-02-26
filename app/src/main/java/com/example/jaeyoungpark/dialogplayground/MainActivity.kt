@@ -21,7 +21,6 @@ import java.util.*
 import android.view.Window.ID_ANDROID_CONTENT
 
 
-
 class MainActivity : AppCompatActivity(), CustomDialogFragment.Listener {
     private val TAG = MainActivity::class.java.simpleName
     var fragment: CustomDialogFragment? = null
